@@ -1,4 +1,3 @@
-
 import { PersonProfile } from './types';
 
 export const translations = {
@@ -8,6 +7,7 @@ export const translations = {
     // App.tsx
     loadingMessage: 'Building Mind Foam bridge to 2055...',
     loadingSubMessage: 'Executing HRA with Solver/Critic agents...',
+    errorTitle: 'Simulation Error',
     errorEthical: 'Ethical check failed (Γ ≤ 0). The generated knowledge is not safe to display. Please refine the input and try again.',
     errorGeneral: 'An error occurred during the simulation. The connection to the future might be unstable. Please try again.',
     resetButton: 'Reset Simulation',
@@ -75,6 +75,7 @@ export const translations = {
     // App.tsx
     loadingMessage: 'Строим мост Пены Разума в 2055...',
     loadingSubMessage: 'Выполнение ГРА с агентами Solver/Critic...',
+    errorTitle: 'Ошибка симуляции',
     errorEthical: 'Этическая проверка не пройдена (Γ ≤ 0). Сгенерированное знание небезопасно для отображения. Пожалуйста, уточните входные данные и попробуйте снова.',
     errorGeneral: 'Во время симуляции произошла ошибка. Соединение с будущим может быть нестабильным. Пожалуйста, попробуйте снова.',
     resetButton: 'Сбросить симуляцию',

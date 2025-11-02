@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { PersonProfile } from '../types';
 import { Bot, HeartPulse, Scale, Shield, Users, Target } from 'lucide-react';
@@ -49,12 +48,13 @@ const InputForm: React.FC<InputFormProps> = ({ onSubmit, isLoading, t }) => {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {inputFields.map(field => (
-          <div key={field.name} className="relative">
-            <div className="absolute top-3 left-3 flex items-center gap-2 text-sm font-semibold text-cyan-300">
+          <label key={field.name} className="relative block">
+            <span className="absolute top-3 left-3 flex items-center gap-2 text-sm font-semibold text-cyan-300 z-10">
               {field.icon}
               <span>{field.label}</span>
-            </div>
+            </span>
             <textarea
+              id={field.name}
               name={field.name}
               value={profile[field.name as keyof PersonProfile]}
               onChange={handleChange}
@@ -63,14 +63,15 @@ const InputForm: React.FC<InputFormProps> = ({ onSubmit, isLoading, t }) => {
               className="w-full bg-gray-900/70 border border-gray-700 rounded-lg px-4 pt-10 pb-3 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 text-gray-200 placeholder-gray-500"
               required
             />
-          </div>
+          </label>
         ))}
-         <div className="relative md:col-span-2">
-            <div className="absolute top-3 left-3 flex items-center gap-2 text-sm font-semibold text-purple-300">
+         <label className="relative block md:col-span-2">
+            <span className="absolute top-3 left-3 flex items-center gap-2 text-sm font-semibold text-purple-300 z-10">
               <Target className="w-5 h-5 text-purple-400" />
               <span>{t.goalLabel}</span>
-            </div>
+            </span>
             <textarea
+              id="goal"
               name="goal"
               value={profile.goal}
               onChange={handleChange}
@@ -78,7 +79,7 @@ const InputForm: React.FC<InputFormProps> = ({ onSubmit, isLoading, t }) => {
               rows={3}
               className="w-full bg-gray-900/70 border border-gray-700 rounded-lg px-4 pt-10 pb-3 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 text-gray-200 placeholder-gray-500"
             />
-          </div>
+          </label>
       </div>
       <div className="text-center pt-4">
         <button

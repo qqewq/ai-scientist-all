@@ -1,10 +1,9 @@
-
 import React, { useState, useCallback } from 'react';
 import { PersonProfile, SimulationResult } from './types';
 import { runSimulation } from './services/geminiService';
 import InputForm from './components/InputForm';
 import ResultsDisplay from './components/ResultsDisplay';
-import { BrainCircuit, Loader, Zap } from 'lucide-react';
+import { BrainCircuit, Loader, Zap, AlertTriangle } from 'lucide-react';
 import { translations } from './localization';
 
 const App: React.FC = () => {
@@ -72,7 +71,7 @@ const App: React.FC = () => {
         </header>
 
         <main className="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl shadow-cyan-500/10 p-6 sm:p-8 border border-gray-700">
-          {!simulationResult && !isLoading && (
+          {!simulationResult && !isLoading && !error && (
             <InputForm onSubmit={handleSubmit} isLoading={isLoading} t={t} />
           )}
 
@@ -85,8 +84,14 @@ const App: React.FC = () => {
           )}
 
           {error && (
-            <div className="text-center p-4">
-              <p className="text-red-400">{error}</p>
+            <div className="text-center p-4 min-h-[300px] flex flex-col justify-center items-center animate-fade-in">
+              <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg max-w-md">
+                 <div className="flex items-center justify-center gap-2 mb-2">
+                    <AlertTriangle className="w-6 h-6 text-red-400" />
+                    <h2 className="text-xl font-semibold text-red-300">{t.errorTitle}</h2>
+                 </div>
+                 <p className="text-red-300">{error}</p>
+              </div>
               <button
                 onClick={handleReset}
                 className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg shadow-yellow-500/20"
