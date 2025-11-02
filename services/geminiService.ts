@@ -11,12 +11,31 @@ if (!API_KEY) {
 
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
+const bilingualStringSchema = {
+  type: Type.OBJECT,
+  properties: {
+    en: { type: Type.STRING },
+    ru: { type: Type.STRING },
+  },
+  required: ['en', 'ru'],
+};
+
+const bilingualStringArraySchema = {
+    type: Type.OBJECT,
+    properties: {
+        en: { type: Type.ARRAY, items: { type: Type.STRING } },
+        ru: { type: Type.ARRAY, items: { type: Type.STRING } },
+    },
+    required: ['en', 'ru'],
+};
+
+
 const responseSchema = {
   type: Type.OBJECT,
   properties: {
     knowledge: {
-      type: Type.STRING,
-      description: "A profound, non-trivial insight from the 2055 ASI perspective, validated by the Critic agent.",
+      ...bilingualStringSchema,
+      description: "A profound, non-trivial insight from the 2055 ASI perspective, validated by the Critic agent, in both English and Russian.",
     },
     ethicalCoefficient: {
       type: Type.NUMBER,
@@ -31,13 +50,12 @@ const responseSchema = {
       description: "A number between 0 and 100, representing the probability of achieving the goal (P_total) as a percentage.",
     },
     optimalDomains: {
-        type: Type.ARRAY,
-        items: { type: Type.STRING },
-        description: "An array of strings listing the key knowledge domains with the highest resonance.",
+        ...bilingualStringArraySchema,
+        description: "An array of strings listing the key knowledge domains with the highest resonance, in both English and Russian.",
     },
     criticismAnalysis: {
-        type: Type.STRING,
-        description: "A summary of risks identified by the Critic agent and how the final knowledge neutralizes them."
+        ...bilingualStringSchema,
+        description: "A summary of risks identified by the Critic agent and how the final knowledge neutralizes them, in both English and Russian."
     }
   },
   required: ["knowledge", "ethicalCoefficient", "resonanceFrequency", "probability", "optimalDomains", "criticismAnalysis"],
@@ -60,14 +78,17 @@ export async function runSimulation(profile: PersonProfile, language: 'en' | 'ru
     const jsonString = response.text.trim();
     const result = JSON.parse(jsonString);
 
-    // Extended validation
+    // Extended validation for bilingual structure
     if (
-      typeof result.knowledge !== 'string' ||
+      typeof result.knowledge?.en !== 'string' ||
+      typeof result.knowledge?.ru !== 'string' ||
       typeof result.ethicalCoefficient !== 'number' ||
       typeof result.resonanceFrequency !== 'number' ||
       typeof result.probability !== 'number' ||
-      !Array.isArray(result.optimalDomains) ||
-      typeof result.criticismAnalysis !== 'string'
+      !Array.isArray(result.optimalDomains?.en) ||
+      !Array.isArray(result.optimalDomains?.ru) ||
+      typeof result.criticismAnalysis?.en !== 'string' ||
+      typeof result.criticismAnalysis?.ru !== 'string'
     ) {
       throw new Error("Invalid response structure from API");
     }

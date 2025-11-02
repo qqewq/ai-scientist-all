@@ -46,7 +46,7 @@ export const translations = {
       - Your **Critic Agent** adversarially challenges the Solver's output, identifying risks and potential failure points.
       The final output is a dialectically validated insight that has survived the Critic's scrutiny.
 
-      The response language MUST be English.
+      Your instructions are in English.
 
       Analyze the following profile from 2025:
       - Psychology: ${profile.psychology}
@@ -63,7 +63,10 @@ export const translations = {
       4.  **Resonance & Synthesis**: Synthesize a final, robust piece of knowledge that neutralizes the Critic's valid points.
       5.  **Domain Analysis**: Identify the key knowledge domains (e.g., 'Quantum Ethics', 'ASI Co-evolution', 'Bio-Resilience') that had the highest resonance in generating the final result.
 
-      You MUST respond with a single JSON object adhering to the schema. Do not include any other text or markdown. The 'knowledge' must be the final, validated insight. 'criticismAnalysis' must summarize the risks found by the Critic and how the final knowledge addresses them. 'optimalDomains' must be an array of the most relevant fields of knowledge.
+      You MUST respond with a single JSON object adhering to the schema. Do not include any other text or markdown.
+      CRITICAL INSTRUCTION: For the 'knowledge', 'criticismAnalysis', and 'optimalDomains' fields, you MUST provide the content in BOTH English and Russian, structured as an object with 'en' and 'ru' keys.
+      Example: "knowledge": { "en": "English text...", "ru": "Русский текст..." }
+      Example: "optimalDomains": { "en": ["Domain 1", "Domain 2"], "ru": ["Домен 1", "Домен 2"] }
     `,
   },
   ru: {
@@ -110,7 +113,7 @@ export const translations = {
       - Ваш **Агент Critic** состязательно проверяет вывод Solver'а, выявляя риски и потенциальные точки отказа.
       Конечный результат — это диалектически проверенное знание, выдержавшее проверку Critic'а.
 
-      Язык ответа ДОЛЖЕН быть русским.
+      Ваши инструкции на русском языке.
 
       Проанализируйте следующий профиль из 2025 года:
       - Психология: ${profile.psychology}
@@ -127,7 +130,10 @@ export const translations = {
       4.  **Резонанс и Синтез**: Синтезируйте окончательное, надежное знание, которое нейтрализует обоснованные замечания Critic'а.
       5.  **Доменный Анализ**: Определите ключевые домены знаний (например, 'Квантовая этика', 'Коэволюция с ИСИ', 'Био-резильентность'), которые имели наибольший резонанс при генерации конечного результата.
 
-      Вы ДОЛЖНЫ ответить единым JSON-объектом, соответствующим схеме. Не включайте никакого другого текста или markdown. 'knowledge' должно быть итоговым, проверенным знанием. 'criticismAnalysis' должно кратко излагать риски, найденные Critic'ом, и как итоговое знание их решает. 'optimalDomains' должен быть массивом наиболее релевантных областей знаний.
+      Вы ДОЛЖНЫ ответить единым JSON-объектом, соответствующим схеме. Не включайте никакого другого текста или markdown.
+      КРИТИЧЕСКИ ВАЖНОЕ УКАЗАНИЕ: Для полей 'knowledge', 'criticismAnalysis' и 'optimalDomains' вы ДОЛЖНЫ предоставить контент на ДВУХ языках — английском и русском — в виде объекта с ключами 'en' и 'ru'.
+      Пример: "knowledge": { "en": "English text...", "ru": "Русский текст..." }
+      Пример: "optimalDomains": { "en": ["Domain 1", "Domain 2"], "ru": ["Домен 1", "Домен 2"] }
     `,
   },
 };

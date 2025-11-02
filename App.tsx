@@ -98,7 +98,7 @@ const App: React.FC = () => {
 
           {simulationResult && (
             <div>
-              <ResultsDisplay result={simulationResult} t={t} />
+              <ResultsDisplay result={simulationResult} t={t} language={language} />
               <div className="text-center mt-8">
                 <button
                   onClick={handleReset}

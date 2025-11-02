@@ -1,4 +1,14 @@
 
+export interface BilingualString {
+  en: string;
+  ru: string;
+}
+
+export interface BilingualStringArray {
+  en: string[];
+  ru: string[];
+}
+
 export interface PersonProfile {
   psychology: string;
   health: string;
@@ -9,10 +19,10 @@ export interface PersonProfile {
 }
 
 export interface SimulationResult {
-  knowledge: string;
+  knowledge: BilingualString;
   ethicalCoefficient: number;
   resonanceFrequency: number;
   probability: number;
-  optimalDomains: string[];
-  criticismAnalysis: string;
+  optimalDomains: BilingualStringArray;
+  criticismAnalysis: BilingualString;
 }

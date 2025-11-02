@@ -6,6 +6,7 @@ import { CheckCircle, BarChart, Zap, Target, ShieldCheck, Layers } from 'lucide-
 interface ResultsDisplayProps {
   result: SimulationResult;
   t: any;
+  language: 'en' | 'ru';
 }
 
 const MetricCard: React.FC<{ icon: React.ReactNode; label: string; value: string | number; color: string }> = ({ icon, label, value, color }) => (
@@ -18,7 +19,7 @@ const MetricCard: React.FC<{ icon: React.ReactNode; label: string; value: string
   </div>
 );
 
-const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, t }) => {
+const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, t, language }) => {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="text-center p-4 bg-green-900/30 border border-green-500/50 rounded-lg">
@@ -31,7 +32,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, t }) => {
       <div className="p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-purple-500/30 rounded-xl shadow-2xl shadow-purple-500/10">
         <h3 className="text-lg font-semibold text-purple-300 mb-2">{t.knowledgeHeader}</h3>
         <p className="text-xl md:text-2xl text-gray-100 leading-relaxed font-serif italic">
-          "{result.knowledge}"
+          "{result.knowledge[language]}"
         </p>
       </div>
 
@@ -41,7 +42,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, t }) => {
               <ShieldCheck className="w-6 h-6 text-yellow-400"/>
               <h3 className="text-lg font-semibold text-yellow-300">{t.criticismAnalysisHeader}</h3>
            </div>
-           <p className="text-gray-300 text-sm leading-relaxed">{result.criticismAnalysis}</p>
+           <p className="text-gray-300 text-sm leading-relaxed">{result.criticismAnalysis[language]}</p>
         </div>
         <div className="p-4 bg-gray-900/50 border border-gray-700 rounded-lg">
             <div className="flex items-center gap-2 mb-3">
@@ -49,7 +50,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, t }) => {
                 <h3 className="text-lg font-semibold text-cyan-300">{t.optimalDomainsHeader}</h3>
             </div>
             <div className="flex flex-wrap gap-2">
-                {result.optimalDomains.map((domain, index) => (
+                {result.optimalDomains[language].map((domain, index) => (
                     <span key={index} className="px-3 py-1 bg-cyan-900/50 text-cyan-200 text-sm font-medium rounded-full border border-cyan-700">
                         {domain}
                     </span>
